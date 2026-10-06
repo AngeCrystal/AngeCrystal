@@ -1,63 +1,97 @@
 <p align="center">
   <picture>
     <source media="(prefers-reduced-motion: reduce)" srcset="assets/crystal-atelier.png">
-    <img src="assets/crystal-atelier.gif" width="100%" alt="Crystal Atelier: a blonde, crimson-eyed character at a cozy computer desk, surrounded by dice, cards and softly twinkling stars.">
+    <img src="assets/crystal-atelier.gif" width="100%" alt="Crystal Atelier — a quiet desk, a starry window, and a few unfinished experiments.">
   </picture>
 </p>
 
-<h1 align="center">Hi, I'm AngeCrystal <sup>✦</sup></h1>
+<h3 align="center"><samp>ange@crystal ~ welcome back</samp></h3>
+<p align="center">You found a terminal with the lights still on.<br><sub>Expand a command. See what is hiding inside.</sub></p>
 
-<p align="center">
-  <strong>From operating systems to intelligent agents — curiosity all the way down.</strong><br>
-  <sub>A little code, a little imagination, and worlds waiting to be explored.</sub>
-</p>
+<p align="center"><a href="README.md">中文</a> · <a href="README.en.md">EN</a></p>
 
-<p align="center">
-  <a href="README.md">简体中文</a> &nbsp; / &nbsp; <a href="README.en.md">English</a>
-  &nbsp; · &nbsp; <a href="https://github.com/AngeCrystal?tab=repositories">Repositories ↗</a>
-</p>
+<details>
+<summary><code>guest@crystal:~ $ /help</code></summary>
 
-<p align="center">
-  <img src="assets/badges/os.svg" height="26" alt="Operating Systems">
-  <img src="assets/badges/systems.svg" height="26" alt="Systems">
-  <img src="assets/badges/agents.svg" height="26" alt="Agents">
-  <img src="assets/badges/ai.svg" height="26" alt="Artificial Intelligence">
-</p>
+```text
+Available commands
 
----
+/whoami    identity
+/skill     open manuals
+/habit     background processes
+/projects  workbench
+/exit      until next time
+```
 
-### ✦ Behind the screen
+</details>
 
-I'm **AngeCrystal**. I like asking *why* technology works, and finding new possibilities between code, stories, and games.
+<details>
+<summary><code>guest@crystal:~ $ /whoami</code></summary>
 
-My interests include **operating systems, systems engineering, AI, and agents**: how programs run, how systems work together, and how agents use tools to get things done. This is a home for my explorations and small, curiosity-driven projects.
+```text
+AngeCrystal
 
-### ⌘ Current orbit
+Someone who likes opening black boxes and stepping into stories.
+Compiling curiosity into small things that run.
+```
 
-| Direction | Questions to explore |
-| :--- | :--- |
-| **OS & Systems** | Beneath the abstractions: processes, memory, concurrency, and system design. |
-| **Agents & AI** | From models to action: tool use, execution feedback, and reliable workflows. |
-| **Build & Experiment** | Understanding big ideas through small, working projects. |
+</details>
 
-### ◈ Things I'm building
+<details>
+<summary><code>guest@crystal:~ $ /skill</code></summary>
 
-| Project | About |
-| :--- | :--- |
-| [**patchpilot ↗**](https://github.com/AngeCrystal/patchpilot) | A Python coding-agent demo exploring host-computed diffs, explicit approval, and bounded execution feedback. |
-| [**mini-renderer ↗**](https://github.com/AngeCrystal/mini-renderer) | A small C++ / OpenGL renderer for learning the real-time graphics pipeline. |
+```text
+~/notes/
+├── os/          processes · memory · concurrency
+├── systems/     abstractions · architecture
+├── agents/      tools · feedback · execution
+└── graphics/    pixels · shaders · rendering
+```
 
-### ♧ Side quests
+From how a program runs to how an agent acts.
+Leaving a trail of experiments, rather than a list of proficiency scores.
 
-**🎲 Board games** &nbsp; Rules, strategy, and good company around a table.  
-**🌸 Anime** &nbsp; Stories and worlds worth getting lost in.  
-**✧ Anime games** &nbsp; Characters, art, music, and a sense of adventure.  
-**🔭 Technology** &nbsp; Staying curious about new ideas and how they work.
+</details>
 
-<br>
+<details>
+<summary><code>guest@crystal:~ $ /habit</code></summary>
 
-<p align="center">
-  <img src="assets/divider.svg" width="480" alt="">
-  <br><samp>Stay curious. Build little worlds.</samp>
-  <br><sub>Let's talk systems, AI, or what to play next.</sub>
-</p>
+```text
+$ ps --after-hours
+
+  dice.roll()          waiting for party
+  next_episode()       suspended at credits
+  daily_quest()        optional
+  curiosity.daemon     always running
+```
+
+An unrolled die waits on the desk.<br>
+A bookmark rests somewhere in the ending credits.<br>
+Daily quests in another world occasionally time out.
+
+</details>
+
+<details>
+<summary><code>guest@crystal:~ $ /projects</code></summary>
+
+Experiments still on the workbench
+
+[`~/workbench/patchpilot`](https://github.com/AngeCrystal/patchpilot)<br>
+Exploring coding agents with inspectable diffs and explicit boundaries.
+
+[`~/workbench/mini-renderer`](https://github.com/AngeCrystal/mini-renderer)<br>
+Starting with a triangle to see how a world gets drawn on screen.
+
+</details>
+
+<details>
+<summary><code>guest@crystal:~ $ /exit</code></summary>
+
+```text
+Process curiosity.daemon is still running.
+Logout cancelled. See you around :)
+```
+
+</details>
+
+<p align="center"><br><samp>There is always another layer to explore.</samp><br><sub>Session stays open. Bring a question, or a new game.</sub></p>
