@@ -1,0 +1,17 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const {marked} = require('marked');
+const root = path.resolve(__dirname,'..');
+for (const [source, destination] of [['README.md','preview.html'], ['README.en.md','preview.en.html']]) {
+const content = marked.parse(fs.readFileSync(path.join(root,source),'utf8')).replaceAll('href="README.md"','href="preview.html"').replaceAll('href="README.en.md"','href="preview.en.html"');
+fs.writeFileSync(path.join(root,destination),`<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AngeCrystal · Profile preview</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1117;--panel:#0d1117;--fg:#e6edf3;--muted:#8b949e;--line:#30363d;--link:#c4b2ee;--soft:#161b22}
+html.light{color-scheme:light;--bg:#f6f8fa;--panel:#fff;--fg:#24292f;--muted:#57606a;--line:#d0d7de;--link:#7952b3;--soft:#f6f8fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",sans-serif}a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.toolbar{max-width:1040px;margin:28px auto 18px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:var(--muted);font:12px ui-monospace,monospace}.toolbar strong{color:var(--fg)}button{background:var(--soft);border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:7px 12px;cursor:pointer}button:focus-visible{outline:2px solid var(--link);outline-offset:3px}
+main{max-width:1000px;margin:0 auto 48px;border:1px solid var(--line);border-radius:8px;padding:30px 36px;background:var(--panel)}.file{font:12px ui-monospace,monospace;color:var(--muted);margin:0 0 24px}img{max-width:100%;vertical-align:middle}picture img{border-radius:6px}h1{font-size:30px;line-height:1.4;margin:25px 0 12px;padding-bottom:12px;border-bottom:1px solid var(--line)}h1 sup{color:#c2a1e5;font-size:18px}h3{font-size:20px;margin:30px 0 16px;font-weight:600}p{margin:16px 0}sub{font-size:12px}hr{height:1px;background:var(--line);border:0;margin:28px 0}details{padding:10px 0;border-bottom:1px solid var(--line)}summary{cursor:pointer;color:var(--link)}pre{padding:16px;background:var(--soft);border-radius:6px;overflow:auto;font:12px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace}table{width:100%;border-collapse:collapse;margin:16px 0}td,th{padding:12px 16px;border:1px solid var(--line);text-align:left}th{background:var(--soft);font-weight:600}td:first-child{width:28%}samp{font-size:14px;color:var(--link)}p[align=center] img[height]{margin:3px}
+@media(max-width:640px){.toolbar{margin:16px auto;font-size:10px;gap:12px}main{border-radius:0;border-left:0;border-right:0;padding:16px;margin-bottom:0}h1{font-size:25px}h3{font-size:18px}body{font-size:14px}td,th{padding:9px 10px}td:first-child{width:32%}.file{margin-bottom:16px}}
+</style></head><body><div class="toolbar"><span><strong>AngeCrystal</strong> / Profile preview</span><button id="theme" aria-pressed="false">切换浅色 / Light</button></div><main><div class="file">AngeCrystal / ${source}</div>${content}</main><script>document.querySelector('#theme').onclick=function(){const light=document.documentElement.classList.toggle('light');this.setAttribute('aria-pressed',String(light));this.textContent=light?'切换深色 / Dark':'切换浅色 / Light';};</script></body></html>`);
+}

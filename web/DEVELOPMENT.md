@@ -2,7 +2,7 @@
 
 在项目根目录运行 `npm run dev:web`（Node/npm 与 Python 3），访问 <http://127.0.0.1:8766/web/>。也可直接运行 `python3 -m http.server 8766 --bind 127.0.0.1`。不要通过 file:// 双击打开，Markdown 需要 HTTP 加载。`python3 -m http.server` 不发送缓存头，浏览器可能继续使用旧的 app.js 或测试模块；改代码后强制刷新，或使用 `.claude/launch.json` 中带 `Cache-Control: no-store` 的同端口服务。
 
-已于 2026-10-11 部署至 https://angecrystal-terminal.angecrystal.chatgpt.site ，当前访问范围为公开，任何人均可访问。`web/` 为维护源目录，支持静态托管与子路径部署。
+当前托管改为 GitHub Pages：https://angecrystal.github.io/AngeCrystal/ ，公开访问。`web/` 为维护源目录，`docs/` 为发布文件；旧 Sites 地址保留历史版本，本次不再更新。
 
 ## 页面结构（2026-10-11 第二版）
 
@@ -79,3 +79,21 @@
 - 部署状态：succeeded。
 - 后续修改 web/ 后需要同步至发布目录，并按 Sites 技能更新同一个项目；本地修改不会自动上线。
 - 2026-10-11 第二版（内嵌终端与滚动）已同步到 `dist/`，但尚未发布；线上仍是首次发布的版本。
+
+## GitHub Pages 发布（2026-10-12）
+
+仓库 `AngeCrystal/AngeCrystal` 使用 `main` 分支的 `/docs`，HTTPS 已启用。
+
+每次修改 `web/` 后：
+
+```bash
+cd /Users/angecrystal/Developer/github-modify
+npm run build:pages
+git add web docs
+git commit -m "Update personal terminal"
+git push origin main
+```
+
+GitHub 自动发布提交后的 docs/。不用 Sites，不需要 API 密钥或运行本地服务器。不要直接编辑 docs/，以免下次同步覆盖。
+
+本次部署前浏览器验收：27 passed, 0 failed。软键盘缩放为模拟视口测试，未实测实体手机。
