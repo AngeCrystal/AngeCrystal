@@ -1,0 +1,98 @@
+:root{color-scheme:dark;--bg:#141518;--surface:#1b1d22;--panel:#17181c;--fg:#dddce2;--muted:#93939f;--accent:#c8ace8;--line:#303139;--mint:#9cbdb0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-size:14px;line-height:1.8}
+button,input{font:inherit}
+button,a,input{-webkit-tap-highlight-color:transparent}
+a{color:var(--accent);text-underline-offset:4px}
+button{cursor:pointer;color:var(--fg)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+/* The shell fills the viewport, so history grows inside the terminal instead of stretching the page.
+   --app-height follows the visual viewport (soft keyboards); min-height lets short or zoomed windows scroll the page. */
+.shell{max-width:1040px;height:100vh;height:100dvh;height:min(100dvh,var(--app-height,100dvh));min-height:560px;margin:auto;padding:0 48px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column}
+.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line);font-size:12px;flex-shrink:0}
+.topbar a{text-decoration:none}
+.brand{color:var(--fg)}
+.crystal{font-size:23px;color:var(--accent);vertical-align:middle;margin-right:10px}
+.muted{color:var(--muted)}
+main{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
+.welcome{padding:40px 0 28px;flex-shrink:0}
+.eyebrow{font-size:10px;letter-spacing:2.5px;color:var(--muted);margin:0 0 14px}
+h1{font-size:clamp(24px,4vw,35px);font-weight:500;line-height:1.5;letter-spacing:-1.2px;margin:0 0 14px}
+h1 span{color:var(--accent)}
+.cursor{animation:blink 1.4s steps(1) infinite}
+.intro{color:var(--muted);margin:0}
+.hint{margin:16px 0 0;font-size:12px;color:var(--muted)}
+.hint-command{background:none;border:0;border-bottom:1px dashed #6c597f;padding:0 1px;color:var(--accent)}
+.hint-command:hover{border-bottom-style:solid}
+.terminal{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.terminal-bar{display:flex;align-items:center;gap:14px;padding:9px 16px;border-bottom:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:10px;letter-spacing:1px;flex-shrink:0}
+.dots{display:flex;gap:6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#3a3b44}
+.terminal-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.daemon{white-space:nowrap}
+.daemon i{display:inline-block;width:5px;height:5px;background:var(--mint);border-radius:50%;margin-left:6px;vertical-align:middle}
+.scroll-area{position:relative;flex:1;min-height:0;display:flex}
+.scrollback{flex:1;min-width:0;min-height:0;overflow-y:auto;padding:0 22px;scrollbar-width:thin;scrollbar-color:#45404e transparent}
+.scrollback:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.jump-latest{position:absolute;right:18px;bottom:12px;border:1px solid #51465e;background:#2a2533;color:var(--accent);border-radius:999px;padding:4px 12px;font-size:11px;box-shadow:0 4px 14px #0008}
+.jump-latest:hover{background:#3a3046}
+#empty-state{font-size:12px;color:var(--muted);margin:0;padding:18px 0}
+#history{overflow-wrap:anywhere}
+.entry{padding:18px 0 22px;border-bottom:1px solid #25262c}
+.entry:last-child{border-bottom:0}
+.entry-command{font-size:13px;margin:0 0 14px;font-weight:400;white-space:pre-wrap;overflow-wrap:anywhere}
+.entry-command span{color:var(--mint);margin-right:12px}
+.reply{padding-left:22px;border-left:1px solid #45404e}
+.reply>:first-child{margin-top:0}
+.reply>:last-child{margin-bottom:0}
+.reply p{margin:12px 0}
+.reply h2,.reply h3,.reply h4{font-size:16px;color:var(--fg);font-weight:500;margin:20px 0 10px}
+.reply ul,.reply ol{padding-left:22px}
+.reply li{margin:6px 0}
+.reply code{color:#d5bcf1;font-size:12px}
+.reply pre{background:var(--surface);padding:14px;border-radius:5px;white-space:pre;overflow-x:auto;max-width:100%;scrollbar-width:thin}
+.reply blockquote{margin:12px 0;padding-left:16px;border-left:2px solid var(--line);color:var(--muted)}
+.command-link{border:1px solid var(--line);background:transparent;border-radius:5px;padding:7px 11px;color:var(--accent);font-size:12px}
+.command-link:hover{background:#25222c;border-color:#6c597f}
+.command-list{display:grid;gap:8px}
+.command-row{display:flex;align-items:baseline;gap:16px}
+.command-row button{min-width:135px;text-align:left}
+.command-row span{color:var(--muted);font-size:12px}
+.status{color:#e6b695;font-size:12px;padding:6px 22px;border-top:1px solid var(--line);flex-shrink:0}
+.status:empty{display:none}
+.composer{padding:12px 14px;border-top:1px solid var(--line);background:var(--surface);flex-shrink:0}
+form{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--panel);border:1px solid #48434f;border-radius:7px}
+form:focus-within{border-color:var(--accent)}
+label{flex-shrink:0;font-size:12px}
+.prompt-name{color:var(--mint)}
+.prompt-path{color:var(--muted)}
+input{width:0;min-width:0;flex:1;background:none;color:var(--fg);border:0;padding:3px 0;border-radius:0}
+input:focus-visible{outline:0}
+.submit{background:#302b39;border:1px solid #51465e;color:var(--accent);border-radius:4px;width:34px;height:32px;flex-shrink:0}
+.submit:hover{background:#43364f}
+.input-note{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:10px;margin-top:8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+[hidden]{display:none!important}
+@keyframes blink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.cursor{animation:none}}
+@media(max-width:600px){
+.shell{padding:0 16px max(12px,env(safe-area-inset-bottom));min-height:380px}
+.topbar{padding:14px 0}
+.brand .muted{display:none}
+.welcome{padding:22px 0 16px}
+.eyebrow{display:none}
+h1{font-size:23px;margin-bottom:8px}
+.intro{font-size:13px}
+.hint{margin-top:10px}
+.terminal-title{display:none}
+.daemon{margin-left:auto}
+.scrollback{padding:0 14px}
+.command-row{gap:10px;flex-wrap:wrap}
+.command-row button{min-width:125px}
+.composer{padding:10px}
+.prompt-name{display:none}
+.input-note{font-size:9px}
+.reply{padding-left:14px}
+form{padding:8px 10px;gap:10px}
+}
+@media(max-width:600px) and (max-height:560px){.intro,.input-note{display:none}}

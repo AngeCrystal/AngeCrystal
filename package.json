@@ -1,0 +1,14 @@
+{
+  "name": "angecrystal-profile",
+  "private": true,
+  "scripts": {
+    "build:assets": "node scripts/build-assets.cjs",
+    "build:preview": "node scripts/build-preview.cjs",
+    "dev:web": "python3 -m http.server 8766 --bind 127.0.0.1",
+    "build:pages": "node scripts/build-pages.cjs"
+  },
+  "devDependencies": {
+    "marked": "^15.0.0",
+    "sharp": "0.35.4"
+  }
+}

@@ -1,0 +1,9 @@
+[
+  {"command":"/whoami","description":"认识一下 AngeCrystal","file":"whoami.md"},
+  {"command":"/skill","description":"正在翻阅的手册","file":"skill.md"},
+  {"command":"/hobby","aliases":["/habit"],"description":"终端空闲时的另一面","file":"hobby.md"},
+  {"command":"/patchpilot","description":"一个 Python 编码智能体实验","file":"projects/patchpilot.md","category":"project"},
+  {"command":"/mini-renderer","description":"从三角形开始的图形实验","file":"projects/mini-renderer.md","category":"project"},
+  {"command":"/aaa","description":"待填写的项目示例","file":"projects/example.md"},
+  {"command":"/exit","description":"暂时告别","file":"exit.md"}
+]
