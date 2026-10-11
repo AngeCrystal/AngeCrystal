@@ -10,6 +10,8 @@
 
 <p align="center"><a href="README.md">中文</a> · <a href="README.en.md">EN</a></p>
 
+<p align="center"><a href="https://angecrystal-terminal.angecrystal.chatgpt.site"><strong>打开交互终端 · 输入命令开始探索 ↗</strong></a></p>
+
 <details>
 <summary><code>guest@crystal:~ $ /help</code></summary>
 
