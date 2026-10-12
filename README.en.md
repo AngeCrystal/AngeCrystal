@@ -10,6 +10,9 @@
 
 <p align="center"><a href="README.md">中文</a> · <a href="README.en.md">EN</a></p>
 
-<p align="center"><a href="https://angecrystal.github.io/AngeCrystal/"><strong><samp>guest@crystal:~ $ Open the interactive terminal ↗</samp></strong></a><br><sub>Type <code>/help</code> in the web terminal and see what is hiding inside.</sub></p>
+<p align="center"><a href="https://angecrystal.github.io/AngeCrystal/en/"><picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/terminal-demo.en.static.svg">
+    <img src="assets/terminal-demo.en.svg" width="100%" alt="Interactive terminal demo: /help, /whoami and /skill typed in turn with their replies. Click to open the web terminal and type commands.">
+  </picture></a><br><sub><a href="https://angecrystal.github.io/AngeCrystal/en/">Click the terminal to type your own commands ↗</a></sub></p>
 
 <p align="center"><br><samp>There is always another layer to explore.</samp><br><sub>Session stays open. Bring a question, or a new game.</sub></p>

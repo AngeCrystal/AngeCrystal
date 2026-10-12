@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+  <meta name="description" content="AngeCrystal's personal terminal. Type a command, discover something new.">
+  <title>AngeCrystal — personal terminal</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3L27 16L16 29L5 16Z' fill='%23ccb1f0'/%3E%3C/svg%3E">
+  <link rel="alternate" hreflang="zh-CN" href="../">
+  <link rel="stylesheet" href="../styles.css">
+  <script type="module" src="../app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar"><a class="brand" href="./"><span class="crystal" aria-hidden="true">◇</span> crystal<span class="muted"> / personal terminal</span></a><nav class="top-links" aria-label="Language and links"><span class="lang-switch"><a href="../" lang="zh-CN" hreflang="zh-CN">中文</a> · <a href="./" aria-current="page" lang="en">EN</a></span><a href="https://github.com/AngeCrystal" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
+    <main>
+      <section class="welcome" aria-labelledby="title">
+        <p class="eyebrow">A SMALL WINDOW INTO MY WORLD</p>
+        <h1 id="title">Hello, I'm <span>AngeCrystal</span><span class="cursor" aria-hidden="true">_</span></h1>
+        <p class="intro">You found a terminal with the lights still on.<br>A few small experiments live here, along with questions still being explored.</p>
+        <p class="hint">Type <button type="button" class="hint-command" data-command="/help">/help</button> to start exploring.</p>
+      </section>
+      <section class="terminal" aria-label="Interactive terminal">
+        <div class="terminal-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="terminal-title">guest@crystal: ~ · SESSION / 01</span><span class="daemon">curiosity.daemon <i aria-hidden="true"></i></span></div>
+        <div class="scroll-area">
+          <div id="scrollback" class="scrollback" tabindex="0" role="region" aria-label="Session history">
+            <p id="empty-state">Session ready, waiting for the first command.</p>
+            <div id="history" role="log" aria-label="Commands and replies" aria-live="polite" aria-relevant="additions text"></div>
+          </div>
+          <button id="jump-latest" class="jump-latest" type="button" hidden>↓ Back to latest</button>
+        </div>
+        <div id="status" role="status" class="status"></div>
+        <div class="composer">
+          <form id="command-form" autocomplete="off">
+            <label for="command-input"><span class="prompt-name">guest@crystal</span><span class="prompt-path">:~</span> $ <span class="sr-only">Enter a command</span></label>
+            <input id="command-input" name="command" type="text" placeholder="/help" maxlength="512" spellcheck="false" autocapitalize="off" enterkeyhint="send" aria-describedby="input-note">
+            <button class="submit" type="submit" aria-label="Run command">↵</button>
+          </form>
+          <div class="input-note" id="input-note"><span>Enter to run · /clear to reset</span><span>Static content · no AI chat</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <noscript>Enable JavaScript to use the interactive terminal, or visit <a href="https://github.com/AngeCrystal">my GitHub profile</a>.</noscript>
+</body>
+</html>

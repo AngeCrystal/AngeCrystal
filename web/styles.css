@@ -96,3 +96,8 @@ h1{font-size:23px;margin-bottom:8px}
 form{padding:8px 10px;gap:10px}
 }
 @media(max-width:600px) and (max-height:560px){.intro,.input-note{display:none}}
+.top-links{display:flex;gap:20px;align-items:center}
+.lang-switch{color:var(--muted)}
+.lang-switch a{color:var(--muted)}
+.lang-switch a[aria-current]{color:var(--accent)}
+.reply p .command-link,.reply li .command-link{padding:1px 6px;margin:0 1px}

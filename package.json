@@ -5,7 +5,8 @@
     "build:assets": "node scripts/build-assets.cjs",
     "build:preview": "node scripts/build-preview.cjs",
     "dev:web": "python3 -m http.server 8766 --bind 127.0.0.1",
-    "build:pages": "node scripts/build-pages.cjs"
+    "build:pages": "node scripts/build-pages.cjs",
+    "build:profile": "node scripts/build-profile.cjs"
   },
   "devDependencies": {
     "marked": "^15.0.0",

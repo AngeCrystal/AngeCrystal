@@ -1,8 +1,18 @@
 # 个人终端 · 第一版
 
-在项目根目录运行 `npm run dev:web`（Node/npm 与 Python 3），访问 <http://127.0.0.1:8766/web/>。也可直接运行 `python3 -m http.server 8766 --bind 127.0.0.1`。不要通过 file:// 双击打开，Markdown 需要 HTTP 加载。`python3 -m http.server` 不发送缓存头，浏览器可能继续使用旧的 app.js 或测试模块；改代码后强制刷新，或使用 `.claude/launch.json` 中带 `Cache-Control: no-store` 的同端口服务。
+在项目根目录运行 `npm run dev:web`（Node/npm 与 Python 3），访问 <http://127.0.0.1:8766/web/>（中文）或 <http://127.0.0.1:8766/web/en/>（英文）。也可直接运行 `python3 -m http.server 8766 --bind 127.0.0.1`。不要通过 file:// 双击打开，Markdown 需要 HTTP 加载。`python3 -m http.server` 不发送缓存头，浏览器可能继续使用旧的 app.js 或测试模块；改代码后强制刷新，或使用 `.claude/launch.json` 中带 `Cache-Control: no-store` 的同端口服务。
 
-当前托管改为 GitHub Pages：https://angecrystal.github.io/AngeCrystal/ ，公开访问。`web/` 为维护源目录，`docs/` 为发布文件；旧 Sites 地址保留历史版本，本次不再更新。
+当前托管改为 GitHub Pages：https://angecrystal.github.io/AngeCrystal/ ，公开访问。英文页是 https://angecrystal.github.io/AngeCrystal/en/ 。`web/` 为维护源目录，`docs/` 为 `npm run build:pages` 生成的发布文件；旧 Sites 地址保留历史版本，本次不再更新。
+
+## 双语与内容访问（2026-10-12）
+
+- 两个页面：`web/index.html`（`lang="zh-CN"`）和 `web/en/index.html`（`lang="en"`），结构相同，顶栏有 中文 / EN 切换。`app.js` 按 `<html lang>` 选择界面文案和内容目录。改了其中一个页面的结构，要同步另一个。
+- 内容放在 `web/content/zh/` 和 `web/content/en/` 下，两边文件名必须一致；`commands.json` 的 `description` 写成 `{"zh": "...", "en": "..."}`，`file` 写不带语言前缀的相对路径。
+- Markdown 只能通过命令读取。开发时 `app.js` 直接请求 `content/<lang>/*.md`；发布构建把 `commands.json` 和全部 Markdown 打包成 `docs/content.js`，页面带 `data-bundle` 属性时从这个模块读取。`docs/` 里没有 `content/` 目录，旧的 `.md` 地址会返回 404，站内也没有指向原文或源码仓库的链接。
+- 这不是保密措施：浏览器下载的内容都能在开发者工具里看到，`AngeCrystal/AngeCrystal` 仓库也是公开的（Profile README 仓库必须公开）。它只保证站内没有“查看原文”的入口。
+- 回复里的行内代码如果正好是命令名（例如 `` `/skill` ``），会渲染成可点击的命令按钮，与输入走同一逻辑；其他行内代码保持原样。
+- `/files` 是内建命令，用命令按钮列出全部内容命令，不再有 `files.md`。
+- `npm run build:pages` 会检查每个命令在两种语言下都有描述和 Markdown 文件，缺任何一个就报错退出，不生成 docs/。
 
 ## 页面结构（2026-10-11 第二版）
 
@@ -24,21 +34,26 @@
 
 ## GitHub Profile README
 
-`README.md` 和 `README.en.md` 由 `node scripts/build-profile.cjs` 生成，不要手改。现在只保留封面、身份介绍、语言切换、交互终端入口和结尾语，不再重复折叠命令正文。原 README 中的 `/skill`、`/exit` 与 `/habit` 细节已迁入 `content/skill.md`、`content/exit.md`、`content/hobby.md`。生成后运行 `npm run build:preview`（需先 `npm install`）更新本地预览。
+`README.md` 和 `README.en.md` 由 `npm run build:profile` 生成，不要手改。GitHub README 会去掉 script、iframe、input 和 form，所以不能放可输入的终端。README 里放的是 `scripts/build-terminal-demo.cjs` 从 `web/content/` 生成的动画终端 SVG：依次演示 `/help`、`/whoami`、`/skill`，点击进入对应语言的 Pages 终端。
+
+- 生成的文件：`assets/terminal-demo.{zh,en}.svg`（SMIL 动画）和 `assets/terminal-demo.{zh,en}.static.svg`（减少动态效果时使用）。修改内容或命令后，重新运行 `npm run build:profile`，演示会同步更新。
+- 动画 SVG 的基础属性就是完整的 `/help` 画面，所以不支持 SVG 动画的查看器会显示这一帧，不会是空白窗口。
+- 中文按宽字符折行（不让逗号句号出现在行首），英文按单词折行；超出窗口的回复截断为 `…`。
+- 生成后运行 `npm run build:preview`（需先 `npm install`）更新本地预览 `preview.html`、`preview.en.html`。
 
 ## 维护内容
 
-编辑 `web/content/` 下的 Markdown，刷新网页或重新执行命令即可读取最新内容。无缓存，无服务端、AI 调用、分析追踪或持久化会话。
+编辑 `web/content/zh/` 或 `web/content/en/` 下的 Markdown，在本地刷新网页或重新执行命令即可看到最新内容；线上需要重新 `npm run build:pages` 再推送。无缓存，无服务端、AI 调用、分析追踪或持久化会话。
 
-在 `commands.json` 中增加一项即可新增命令：
+新增命令：写好 `content/zh/<file>` 和 `content/en/<file>`，再在 `commands.json` 中增加一项：
 
 ```json
-{"command":"/example","aliases":["/demo"],"description":"一句话说明","file":"projects/example.md","category":"project"}
+{"command":"/example","aliases":["/demo"],"description":{"zh":"一句话说明","en":"One-line description"},"file":"projects/example.md","category":"project"}
 ```
 
 - `category: "project"` 自动进入 `/projects`。省略它则只进入 `/help`。
-- 命令与别名须是小写 `/a-z0-9-`，不能重复或覆盖 `/help`、`/projects`、`/clear`。
-- 文件路径相对 content，允许子目录，禁止绝对路径和 `..`。
+- 命令与别名须是小写 `/a-z0-9-`，不能重复或覆盖 `/help`、`/projects`、`/files`、`/clear`。
+- 文件路径相对 `content/<lang>/`，允许子目录，禁止绝对路径和 `..`。每个文件都要有中英文两份。
 - `/aaa` 明确为待填写示例；`/habit` 是 `/hobby` 别名；`/skill`、`/exit` 是从原 README 迁入的内容命令。
 - Markdown 支持段落、标题、粗体、斜体、删除线、列表、引用、代码和 HTTP(S)/mailto 链接。原始 HTML 按文本显示，图片仅显示替代文字；复杂 Markdown 如表格按源文本显示。
 - 所有文件将公开可读，不应放入任何私密信息。
@@ -97,3 +112,14 @@ git push origin main
 GitHub 自动发布提交后的 docs/。不用 Sites，不需要 API 密钥或运行本地服务器。不要直接编辑 docs/，以免下次同步覆盖。
 
 本次部署前浏览器验收：27 passed, 0 failed。软键盘缩放为模拟视口测试，未实测实体手机。
+
+修改内容或命令后，发布前还要运行 `npm run build:profile`，让 README 演示同步，并把 `README*.md` 和 `assets/terminal-demo.*` 一起提交。
+
+## 验证（2026-10-12 双语与内容访问）
+
+先运行 `npm run build:pages`，再打开 <http://127.0.0.1:8766/tests/browser.html>；测试会同时检查 `web/` 源码页和 `docs/` 发布页。结果：36 passed, 0 failed, 0 skipped（浏览器面板可见时运行）。新增用例覆盖：
+- 行内命令名可点击并执行；`/files` 只列命令，回复里没有链接和 `.md`；
+- 中文页每个命令都能读取；英文页界面和 `/help` 里没有中文；英文页每个命令都读取英文文件且回复里没有中文，只请求 `en/` 下的内容；英文页的未知命令和 `/files` 回复为英文；
+- 中英文发布页都从 bundle 读取内容，不发出任何 Markdown 请求；`docs/content/...` 下的旧地址返回 404。
+
+另外验证了：缺少英文文件时构建报错退出；README 动画 SVG 在浏览器中按时间点检查了 `/help`、`/whoami`、`/skill` 三个场景（中英文）；去掉全部动画元素后显示完整的 `/help` 画面；中英文演示的行宽都在窗口内；生成的 SVG 通过 XML 校验。尚未在 github.com 上实际查看 README 渲染效果，推送后需要确认一次。

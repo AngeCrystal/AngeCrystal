@@ -1,9 +1,28 @@
 import { lexer } from './vendor/marked.esm.js';
 
+// The page language comes from <html lang>; content lives in content/<lang>/ with identical file names.
+const lang = document.documentElement.lang.startsWith('en') ? 'en' : 'zh';
+const text = {
+  zh: {
+    help: '列出所有可用命令', projects: '打开项目工作台', files: '列出可以读取的内容', clear: '清空当前会话',
+    loading: '读取内容…', cleared: '会话已清空。', configMissing: '命令配置暂时无法读取。可以使用 /help 和 /clear，或刷新重试。',
+    clearedBroken: '命令配置无法读取，请刷新重试。会话已清空。', projectsIntro: '工作台上还没收起来的实验。', noProjects: '暂无可读取的项目配置。',
+    filesIntro: '这些内容只能通过命令读取。输入或点击一条命令打开它。', unavailable: '内容命令暂时不可用，请刷新重试。',
+    unknown: '没有找到这条命令。第一版仅支持单条命令，不支持参数或 shell 语法。', readError: '这份内容暂时无法读取，请稍后再试。你仍可以使用其他命令。',
+  },
+  en: {
+    help: 'List every available command', projects: 'Open the project workbench', files: 'List the content you can read', clear: 'Clear this session',
+    loading: 'Loading…', cleared: 'Session cleared.', configMissing: 'Command config could not be loaded. /help and /clear still work, or refresh to retry.',
+    clearedBroken: 'Command config could not be loaded; refresh to retry. Session cleared.', projectsIntro: 'Experiments still on the workbench.', noProjects: 'No project config available yet.',
+    filesIntro: 'This content can only be read through commands. Type or click one to open it.', unavailable: 'Content commands are unavailable right now; refresh to retry.',
+    unknown: 'Command not found. Only single commands are supported, no arguments or shell syntax.', readError: 'This content could not be loaded. Try again later; other commands still work.',
+  },
+}[lang];
 const builtins = [
-  { command: '/help', description: '列出所有可用命令' },
-  { command: '/projects', description: '打开项目工作台' },
-  { command: '/clear', description: '清空当前会话' },
+  { command: '/help', description: text.help },
+  { command: '/projects', description: text.projects },
+  { command: '/files', description: text.files },
+  { command: '/clear', description: text.clear },
 ];
 const history = document.querySelector('#history');
 const input = document.querySelector('#command-input');
@@ -25,7 +44,7 @@ function inline(tokens = []) {
     let el;
     if (['strong', 'em', 'del'].includes(token.type)) {
       el = node(token.type); el.append(inline(token.tokens));
-    } else if (token.type === 'codespan') el = node('code', token.text);
+    } else if (token.type === 'codespan') el = isCommand(token.text) ? commandButton(token.text) : node('code', token.text);
     else if (token.type === 'br') el = node('br');
     else if (token.type === 'link') {
       let safe = false;
@@ -59,7 +78,15 @@ function blocks(tokens) {
   }
   return fragment;
 }
+// Published builds (see scripts/build-pages.cjs) ship no Markdown files: content comes from one bundled module,
+// so it can only be reached through commands. During development the files are fetched directly.
+const bundle = document.documentElement.hasAttribute('data-bundle') ? import('./content.js').then(m => m.default) : null;
 async function readFile(path, json = false) {
+  if (bundle) {
+    const content = (await bundle)[path];
+    if (content === undefined) throw new Error(`Missing ${path}`);
+    return content;
+  }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
   try {
@@ -72,7 +99,7 @@ function validateConfig(items) {
   if (!Array.isArray(items)) throw new Error('Commands must be an array');
   const names = new Set(builtins.map(c => c.command));
   for (const item of items) {
-    if (!item || typeof item.description !== 'string' || typeof item.file !== 'string' ||
+    if (!item || typeof item.description?.zh !== 'string' || typeof item.description?.en !== 'string' || typeof item.file !== 'string' ||
         !/^[a-zA-Z0-9_-]+(?:\/[a-zA-Z0-9_-]+)*\.md$/.test(item.file) ||
         (item.aliases !== undefined && !Array.isArray(item.aliases))) throw new Error('Invalid content command');
     for (const name of [item.command, ...(item.aliases || [])]) {
@@ -80,12 +107,14 @@ function validateConfig(items) {
       names.add(name);
     }
   }
-  return items;
+  return items.map(item => ({ ...item, description: item.description[lang], file: `${lang}/${item.file}` }));
 }
 const ready = readFile('commands.json', true).then(validateConfig).then(items => { commands = items; }).catch(() => {
   configError = true;
-  status.textContent = '命令配置暂时无法读取。可以使用 /help 和 /clear，或刷新重试。';
+  status.textContent = text.configMissing;
 });
+const findCommand = name => commands.find(c => c.command === name || c.aliases?.includes(name));
+const isCommand = name => builtins.some(c => c.command === name) || Boolean(findCommand(name));
 function commandButton(command) {
   const button = node('button', command); button.type = 'button'; button.className = 'command-link'; button.dataset.command = command; return button;
 }
@@ -140,13 +169,13 @@ async function execute(raw) {
   const name = trimmed.toLowerCase();
   if (name === '/clear') {
     history.replaceChildren(); empty.hidden = false; showLatest();
-    status.textContent = configError ? '命令配置无法读取，请刷新重试。会话已清空。' : '会话已清空。'; return;
+    status.textContent = configError ? text.clearedBroken : text.cleared; return;
   }
   status.textContent = '';
   empty.hidden = true;
   const entry = node('section'); entry.className = 'entry';
   const heading = node('h2'); heading.className = 'entry-command'; heading.append(node('span', 'guest@crystal:~ $'), document.createTextNode(trimmed));
-  const reply = node('div', '读取内容…'); reply.className = 'reply'; reply.setAttribute('aria-busy', 'true');
+  const reply = node('div', text.loading); reply.className = 'reply'; reply.setAttribute('aria-busy', 'true');
   entry.append(heading, reply); history.append(entry);
   showLatest(); // A new command always brings the reader back to the newest output.
   // Allocate each reply slot before awaiting I/O, so concurrent results never reorder.
@@ -154,15 +183,18 @@ async function execute(raw) {
   if (!entry.isConnected) return; // /clear also discards all pending replies.
   const out = document.createDocumentFragment(); // Keep the loading text until the reply is ready.
   try {
-    if (name === '/help') commandList([builtins[0], ...commands, builtins[1], builtins[2]], out);
+    if (name === '/help') commandList([builtins[0], ...commands, ...builtins.slice(1)], out);
     else if (name === '/projects') {
       const projects = commands.filter(c => c.category === 'project');
-      out.append(node('p', projects.length ? '工作台上还没收起来的实验。' : '暂无可读取的项目配置。'));
+      out.append(node('p', projects.length ? text.projectsIntro : text.noProjects));
       commandList(projects, out);
+    } else if (name === '/files') {
+      out.append(node('p', commands.length ? text.filesIntro : text.unavailable));
+      commandList(commands, out);
     } else {
-      const match = commands.find(c => c.command === name || c.aliases?.includes(name));
+      const match = findCommand(name);
       if (!match) {
-        out.append(node('p', configError ? '内容命令暂时不可用，请刷新重试。' : '没有找到这条命令。第一版仅支持单条命令，不支持参数或 shell 语法。'), commandButton('/help'));
+        out.append(node('p', configError ? text.unavailable : text.unknown), commandButton('/help'));
       } else {
         const markdown = await readFile(match.file);
         if (!entry.isConnected) return;
@@ -171,7 +203,7 @@ async function execute(raw) {
     }
     reply.replaceChildren(out);
   } catch {
-    reply.replaceChildren(node('p', '这份内容暂时无法读取，请稍后再试。你仍可以使用其他命令。'), commandButton('/help'));
+    reply.replaceChildren(node('p', text.readError), commandButton('/help'));
   } finally { reply.setAttribute('aria-busy', 'false'); }
   if (entry.isConnected) settle(); // Late replies discarded by /clear never scroll.
 }

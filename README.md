@@ -10,6 +10,9 @@
 
 <p align="center"><a href="README.md">中文</a> · <a href="README.en.md">EN</a></p>
 
-<p align="center"><a href="https://angecrystal.github.io/AngeCrystal/"><strong><samp>guest@crystal:~ $ 打开交互终端 ↗</samp></strong></a><br><sub>在网页终端里输入 <code>/help</code>，看看里面藏着什么。</sub></p>
+<p align="center"><a href="https://angecrystal.github.io/AngeCrystal/"><picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/terminal-demo.zh.static.svg">
+    <img src="assets/terminal-demo.zh.svg" width="100%" alt="交互终端演示：依次输入 /help、/whoami、/skill 并显示回复。点击进入可以输入命令的网页终端。">
+  </picture></a><br><sub><a href="https://angecrystal.github.io/AngeCrystal/">点击终端，亲手输入命令 ↗</a></sub></p>
 
 <p align="center"><br><samp>There is always another layer to explore.</samp><br><sub>会话保持开放。欢迎带着一个问题，或一局新游戏回来。</sub></p>

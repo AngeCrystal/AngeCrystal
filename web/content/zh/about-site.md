@@ -12,4 +12,4 @@
 
 会话只在当前页面里保留，刷新就会重置。现在由 GitHub Pages 托管。
 
-[查看这个主页的源码](https://github.com/AngeCrystal/AngeCrystal)
+[去我的 GitHub 看看](https://github.com/AngeCrystal)
