@@ -26,7 +26,7 @@ if (missing.length) {
 // Pages gets no content/ directory: Markdown is only reachable through terminal commands.
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(path.join(out, 'en'), { recursive: true });
-for (const name of ['app.js', 'styles.css', 'vendor']) {
+for (const name of ['app.js', 'styles.css', 'vendor', 'assets']) {
   fs.cpSync(path.join(web, name), path.join(out, name), { recursive: true });
 }
 for (const page of ['index.html', 'en/index.html']) {

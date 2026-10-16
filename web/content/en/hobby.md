@@ -1,5 +1,3 @@
-## Background processes
-
 Board games, anime, gacha games, and new technology that always earns a second look.
 
 Sometimes I want to understand a set of rules; sometimes I just want to stay in another world for a while.

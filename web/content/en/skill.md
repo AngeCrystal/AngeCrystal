@@ -23,3 +23,5 @@ AI and agents take the question to the other end: how to use tools, take in feed
 `/mini-renderer` starts from basic graphics with C++ / OpenGL. It gives these explorations a very direct kind of feedback: the code I write ends up as pixels on the screen.
 
 Rather than listing a long row of tool names, I'd like to leave behind things you can open, run and keep changing.
+
+For concrete paths through these interests, open `/systems`, `/agent-notes`, or `/stockflow`.

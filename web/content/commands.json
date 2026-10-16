@@ -1,13 +1,128 @@
 [
-  {"command":"/whoami","description":{"zh":"认识一下 AngeCrystal","en":"Meet AngeCrystal"},"file":"whoami.md"},
-  {"command":"/skill","description":{"zh":"正在翻阅的手册","en":"Manuals currently open"},"file":"skill.md"},
-  {"command":"/hobby","aliases":["/habit"],"description":{"zh":"终端空闲时的另一面","en":"When the terminal idles"},"file":"hobby.md"},
-  {"command":"/now","description":{"zh":"最近在做什么 · 手动更新","en":"What I'm up to · updated by hand"},"file":"now.md"},
-  {"command":"/workflow","description":{"zh":"这个项目的做事节奏","en":"How this project gets made"},"file":"workflow.md"},
-  {"command":"/about-site","description":{"zh":"为什么主页是一个终端","en":"Why this homepage is a terminal"},"file":"about-site.md"},
-  {"command":"/chat","description":{"zh":"可以从这些话题开始","en":"Topics to start a conversation"},"file":"chat.md"},
-  {"command":"/patchpilot","description":{"zh":"一个 Python 编码智能体实验","en":"A Python coding-agent experiment"},"file":"projects/patchpilot.md","category":"project"},
-  {"command":"/mini-renderer","description":{"zh":"从三角形开始的图形实验","en":"A graphics experiment that starts with a triangle"},"file":"projects/mini-renderer.md","category":"project"},
-  {"command":"/aaa","description":{"zh":"待填写的项目示例","en":"Placeholder project example"},"file":"projects/example.md"},
-  {"command":"/exit","description":{"zh":"暂时告别","en":"Until next time"},"file":"exit.md"}
+  {
+    "command": "/whoami",
+    "description": {
+      "zh": "认识一下 AngeCrystal",
+      "en": "Meet AngeCrystal"
+    },
+    "file": "whoami.md"
+  },
+  {
+    "command": "/skill",
+    "description": {
+      "zh": "正在翻阅的手册",
+      "en": "Manuals currently open"
+    },
+    "file": "skill.md"
+  },
+  {
+    "command": "/hobby",
+    "aliases": [
+      "/habit"
+    ],
+    "description": {
+      "zh": "终端空闲时的另一面",
+      "en": "When the terminal idles"
+    },
+    "file": "hobby.md"
+  },
+  {
+    "command": "/now",
+    "description": {
+      "zh": "最近在做什么 · 手动更新",
+      "en": "What I'm up to · updated by hand"
+    },
+    "file": "now.md"
+  },
+  {
+    "command": "/workflow",
+    "description": {
+      "zh": "这个项目的做事节奏",
+      "en": "How this project gets made"
+    },
+    "file": "workflow.md"
+  },
+  {
+    "command": "/about-site",
+    "description": {
+      "zh": "为什么主页是一个终端",
+      "en": "Why this homepage is a terminal"
+    },
+    "file": "about-site.md"
+  },
+  {
+    "command": "/chat",
+    "description": {
+      "zh": "可以从这些话题开始",
+      "en": "Topics to start a conversation"
+    },
+    "file": "chat.md"
+  },
+  {
+    "command": "/patchpilot",
+    "description": {
+      "zh": "一个 Python 编码智能体实验",
+      "en": "A Python coding-agent experiment"
+    },
+    "file": "projects/patchpilot.md",
+    "category": "project"
+  },
+  {
+    "command": "/mini-renderer",
+    "description": {
+      "zh": "从三角形开始的图形实验",
+      "en": "A graphics experiment that starts with a triangle"
+    },
+    "file": "projects/mini-renderer.md",
+    "category": "project"
+  },
+  {
+    "command": "/systems",
+    "description": {
+      "zh": "沿着程序走进系统",
+      "en": "Following a program into the system"
+    },
+    "file": "systems.md"
+  },
+  {
+    "command": "/agent-notes",
+    "description": {
+      "zh": "模型提出下一步之后",
+      "en": "After the model proposes a step"
+    },
+    "file": "agent-notes.md"
+  },
+  {
+    "command": "/learning",
+    "description": {
+      "zh": "代码完成之后，怎样继续学",
+      "en": "Learning beyond working code"
+    },
+    "file": "learning.md"
+  },
+  {
+    "command": "/stockflow",
+    "description": {
+      "zh": "起步中的 Java 业务练习",
+      "en": "An early Java business-app exercise"
+    },
+    "file": "projects/stockflow.md",
+    "category": "project"
+  },
+  {
+    "command": "/aaa",
+    "description": {
+      "zh": "待填写的项目示例",
+      "en": "Placeholder project example"
+    },
+    "file": "projects/example.md"
+  },
+  {
+    "command": "/exit",
+    "description": {
+      "zh": "暂时告别",
+      "en": "Until next time"
+    },
+    "file": "exit.md"
+  }
 ]

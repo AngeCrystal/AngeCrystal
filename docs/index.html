@@ -4,24 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
   <meta name="description" content="AngeCrystal 的个人终端。输入一条命令，发现一点新的东西。">
-  <title>AngeCrystal — personal terminal</title>
+  <title>AngeCrystal — The Crystal Atelier</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3L27 16L16 29L5 16Z' fill='%23ccb1f0'/%3E%3C/svg%3E">
   <link rel="alternate" hreflang="en" href="./en/">
   <link rel="stylesheet" href="./styles.css">
   <script type="module" src="./app.js"></script>
 </head>
 <body>
+  <div class="ambient" aria-hidden="true"></div>
   <div class="shell">
-    <header class="topbar"><a class="brand" href="./"><span class="crystal" aria-hidden="true">◇</span> crystal<span class="muted"> / personal terminal</span></a><nav class="top-links" aria-label="语言与链接"><span class="lang-switch"><a href="./" aria-current="page" lang="zh-CN">中文</a> · <a href="./en/" lang="en" hreflang="en">EN</a></span><a href="https://github.com/AngeCrystal" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
+    <header class="topbar"><a class="brand" href="./"><span class="crystal" aria-hidden="true">◇</span> crystal<span class="muted"> / atelier</span></a><nav class="top-links" aria-label="语言与链接"><span class="lang-switch"><a href="./" aria-current="page" lang="zh-CN">中文</a> · <a href="./en/" lang="en" hreflang="en">EN</a></span><a href="https://github.com/AngeCrystal" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
     <main>
       <section class="welcome" aria-labelledby="title">
-        <p class="eyebrow">A SMALL WINDOW INTO MY WORLD</p>
-        <h1 id="title">Hello, I'm <span>AngeCrystal</span><span class="cursor" aria-hidden="true">_</span></h1>
+        <div class="hero-art" aria-hidden="true"><img src="./assets/atelier.png" alt="" fetchpriority="high" width="1536" height="1024"><span class="star star-one">✦</span><span class="star star-two">✧</span><span class="star star-three">✦</span></div>
+        <div class="hero-copy">
+        <p class="eyebrow"><span></span> THE CRYSTAL ATELIER <span class="edition"> / 01</span></p>
+        <h1 id="title"><small>Hello, world. I'm</small><span>AngeCrystal</span><span class="cursor" aria-hidden="true">_</span></h1>
         <p class="intro">你发现了一个还亮着灯的终端。<br>这里放着一些小实验，和还没探索完的问题。</p>
         <p class="hint">输入 <button type="button" class="hint-command" data-command="/help">/help</button> 开始探索。</p>
+        </div>
+        <div class="scene-caption" aria-hidden="true"><span>夜のアトリエ</span><span>AFTER HOURS / STILL CURIOUS</span></div>
       </section>
       <section class="terminal" aria-label="交互终端">
-        <div class="terminal-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="terminal-title">guest@crystal: ~ · SESSION / 01</span><span class="daemon">curiosity.daemon <i aria-hidden="true"></i></span></div>
+        <div class="terminal-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="terminal-title">crystal.sh <span class="terminal-location">— ~/atelier</span></span><span class="daemon">SESSION / 01 <i aria-hidden="true"></i></span></div>
         <div class="scroll-area">
           <div id="scrollback" class="scrollback" tabindex="0" role="region" aria-label="会话记录">
             <p id="empty-state">会话已就绪，等待第一条命令。</p>
@@ -36,10 +41,11 @@
             <input id="command-input" name="command" type="text" placeholder="/help" maxlength="512" spellcheck="false" autocapitalize="off" enterkeyhint="send" aria-describedby="input-note">
             <button class="submit" type="submit" aria-label="执行命令">↵</button>
           </form>
-          <div class="input-note" id="input-note"><span>Enter 执行 · /clear 清屏</span><span>静态内容 · 无 AI 对话</span></div>
+          <div class="input-note" id="input-note"><span>Enter 执行 · /clear 清屏</span><span>↑ 向上翻阅会话</span></div>
         </div>
       </section>
     </main>
+    <footer class="site-footer"><span><i aria-hidden="true"></i> 一盏灯，一些代码，还有未完的世界。</span><span class="footer-mark">◇ BUILT WITH CURIOSITY</span></footer>
   </div>
   <noscript>请启用 JavaScript 使用交互终端，或访问 <a href="https://github.com/AngeCrystal">GitHub 主页</a>。</noscript>
 </body>
